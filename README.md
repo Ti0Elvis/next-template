@@ -21,5 +21,5 @@ This is a **command-line tool** to quickly scaffold a Next.js + TailwindCSS proj
 ## 🛠️ Usage
 
 ```bash
-npx your-generator-name
+npx @tioelvis/next-ui
 ```
