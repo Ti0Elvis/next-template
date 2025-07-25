@@ -39,7 +39,7 @@ export async function get_prompts() {
       name: "components",
       message: "Which components do you want to install?",
       instructions: false,
-      choices: [],
+      choices: [{ title: "Accordion", value: "accordion" }],
     },
     {
       onCancel: () => {
