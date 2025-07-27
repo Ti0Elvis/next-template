@@ -4,7 +4,7 @@
   "description": "CLI to scaffold a Next.js + Tailwind project using shadcn/ui components",
   "type": "module",
   "bin": {
-    "next-ui": "./src/main.js"
+    "next-template": "./src/main.js"
   },
   "keywords": [
     "cli",
@@ -22,7 +22,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ti0Elvis/next-ui"
+    "url": "https://github.com/Ti0Elvis/next-template"
   },
   "dependencies": {
     "chalk": "^5.4.1",
