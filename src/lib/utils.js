@@ -31,7 +31,6 @@ export async function get_prompts() {
       choices: [
         { title: "npm", value: "npm" },
         { title: "pnpm", value: "pnpm" },
-        { title: "yarn", value: "yarn" },
       ],
     },
     {

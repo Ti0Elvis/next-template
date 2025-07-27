@@ -93,11 +93,6 @@ async function main() {
       run(`pnpm add ${DEV_DEPENDENCIES.join(" ")} -D`, project_path);
     }
 
-    if (package_manager === "yarn") {
-      run(`yarn add ${DEPENDENCIES.join(" ")}`, project_path);
-      run(`yarn add ${DEV_DEPENDENCIES.join(" ")} -D`, project_path);
-    }
-
     console.log(chalk.green("\n✅ Project created successfully! 🚀"));
     process.exit(0);
   } catch (error) {
