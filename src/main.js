@@ -94,6 +94,12 @@ async function main() {
     }
 
     console.log(chalk.green("\n✅ Project created successfully! 🚀"));
+
+    console.log(
+      chalk.yellow(
+        "📄 Make sure to add your API in the .env file, e.g.: API=http://localhost:9000"
+      )
+    );
     process.exit(0);
   } catch (error) {
     console.error(chalk.red("❌ Internal error"), error.message);
