@@ -47,6 +47,7 @@ const COMPONENTS = [
   "breadcrumb",
   "button",
   "calendar",
+  "card",
 ];
 
 export {
