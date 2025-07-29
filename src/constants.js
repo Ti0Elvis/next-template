@@ -81,6 +81,7 @@ const COMPONENTS = [
   "table",
   "tabs",
   "textarea",
+  "toggle",
 ];
 
 export {
