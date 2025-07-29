@@ -61,6 +61,7 @@ const COMPONENTS = [
   "hover-card",
   "input",
   "input-otp",
+  "label",
 ];
 
 export {
