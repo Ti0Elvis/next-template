@@ -58,6 +58,7 @@ const COMPONENTS = [
   "drawer",
   "dropdown-menu",
   "form",
+  "hover-card",
 ];
 
 export {
