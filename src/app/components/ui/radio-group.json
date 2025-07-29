@@ -1,0 +1,6 @@
+{
+  "dependencies": ["@radix-ui/react-radio-group"],
+  "dev_dependence": [],
+  "hooks": [],
+  "supports": []
+}

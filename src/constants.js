@@ -67,6 +67,7 @@ const COMPONENTS = [
   "pagination",
   "popover",
   "progress",
+  "radio-group",
 ];
 
 export {
