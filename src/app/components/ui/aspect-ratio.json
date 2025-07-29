@@ -1,0 +1,6 @@
+{
+  "dependencies": ["@radix-ui/react-aspect-ratio"],
+  "dev_dependence": [],
+  "hooks": [],
+  "supports": []
+}

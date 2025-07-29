@@ -37,7 +37,7 @@ const DEV_DEPENDENCIES = [
   "typescript",
 ];
 
-const COMPONENTS = ["accordion", "alert", "alert-dialog"];
+const COMPONENTS = ["accordion", "alert", "alert-dialog", "aspect-ratio"];
 
 export {
   __dirname,
