@@ -43,6 +43,7 @@ const COMPONENTS = [
   "alert-dialog",
   "aspect-ratio",
   "avatar",
+  "badge",
 ];
 
 export {
