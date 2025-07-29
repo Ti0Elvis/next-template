@@ -1,6 +1,6 @@
 {
   "name": "@tioelvis/next-template",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "CLI to scaffold a Next.js + Tailwind project using shadcn/ui components",
   "type": "module",
   "bin": {
@@ -45,6 +45,7 @@
     "clsx": "^2.1.1",
     "cookies-next": "^6.1.0",
     "date-fns": "^4.1.0",
+    "embla-carousel-react": "^8.6.0",
     "eslint": "^9.32.0",
     "eslint-config-next": "^15.4.4",
     "lucide-react": "^0.532.0",

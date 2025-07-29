@@ -48,6 +48,7 @@ const COMPONENTS = [
   "button",
   "calendar",
   "card",
+  "carousel",
 ];
 
 export {
