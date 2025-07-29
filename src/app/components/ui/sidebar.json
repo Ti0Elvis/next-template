@@ -1,0 +1,6 @@
+{
+  "dependencies": ["@radix-ui/react-slot"],
+  "dev_dependence": [],
+  "hooks": ["use-mobile"],
+  "supports": ["button", "input", "separator", "sheet", "skeleton", "tooltip"]
+}

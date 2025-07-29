@@ -1,6 +1,6 @@
 {
   "name": "@tioelvis/next-template",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "description": "CLI to scaffold a Next.js + Tailwind project using shadcn/ui components",
   "type": "module",
   "bin": {
@@ -51,6 +51,7 @@
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tooltip": "^1.2.7",
     "@tailwindcss/postcss": "^4.1.11",
     "@tanstack/react-query": "^5.83.0",
     "@types/node": "^24.1.0",

@@ -73,6 +73,7 @@ const COMPONENTS = [
   "select",
   "separator",
   "sheet",
+  "sidebar",
 ];
 
 export {
