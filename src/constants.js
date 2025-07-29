@@ -83,6 +83,7 @@ const COMPONENTS = [
   "textarea",
   "toggle",
   "toggle-group",
+  "tooltip",
 ];
 
 export {
