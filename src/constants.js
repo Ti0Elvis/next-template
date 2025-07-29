@@ -79,6 +79,7 @@ const COMPONENTS = [
   "sonner",
   "switch",
   "table",
+  "tabs",
 ];
 
 export {

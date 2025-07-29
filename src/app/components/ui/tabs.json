@@ -1,0 +1,6 @@
+{
+  "dependencies": ["@radix-ui/react-tabs"],
+  "dev_dependence": [],
+  "hooks": [],
+  "supports": []
+}
