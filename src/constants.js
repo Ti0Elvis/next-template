@@ -44,6 +44,7 @@ const COMPONENTS = [
   "aspect-ratio",
   "avatar",
   "badge",
+  "breadcrumb",
 ];
 
 export {
