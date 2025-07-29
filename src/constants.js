@@ -56,6 +56,7 @@ const COMPONENTS = [
   "context-menu",
   "dialog",
   "drawer",
+  "dropdown-menu",
 ];
 
 export {
