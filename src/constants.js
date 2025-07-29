@@ -5,7 +5,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const TEMPLATE_PATH = path.join(__dirname, "template");
-const COMPONENTS_PATH = path.join(__dirname, "app", "components");
+const COMPONENTS_PATH = path.join(__dirname, "app", "components", "ui");
 const HOOKS_PATH = path.join(__dirname, "app", "hooks");
 
 const DEPENDENCIES = [
@@ -37,7 +37,7 @@ const DEV_DEPENDENCIES = [
   "typescript",
 ];
 
-const COMPONENTS = ["accordion", "alert"];
+const COMPONENTS = ["accordion", "alert", "alert-dialog"];
 
 export {
   __dirname,
