@@ -52,6 +52,7 @@ const COMPONENTS = [
   "chart",
   "checkbox",
   "collapsible",
+  "command",
 ];
 
 export {

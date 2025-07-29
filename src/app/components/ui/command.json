@@ -1,0 +1,6 @@
+{
+  "dependencies": ["cmdk"],
+  "dev_dependence": [],
+  "hooks": [],
+  "supports": ["dialog"]
+}
