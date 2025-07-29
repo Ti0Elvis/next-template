@@ -1,0 +1,12 @@
+{
+  "dependencies": [
+    "@radix-ui/react-label",
+    "@radix-ui/react-slot",
+    "react-hook-form",
+    "zod",
+    "@hookform/resolvers"
+  ],
+  "dev_dependence": [],
+  "hooks": [],
+  "supports": ["label"]
+}

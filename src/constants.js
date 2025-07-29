@@ -57,6 +57,7 @@ const COMPONENTS = [
   "dialog",
   "drawer",
   "dropdown-menu",
+  "form",
 ];
 
 export {
