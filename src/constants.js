@@ -54,6 +54,7 @@ const COMPONENTS = [
   "collapsible",
   "command",
   "context-menu",
+  "dialog",
 ];
 
 export {
