@@ -69,6 +69,7 @@ const COMPONENTS = [
   "progress",
   "radio-group",
   "resizable",
+  "scroll-area",
 ];
 
 export {

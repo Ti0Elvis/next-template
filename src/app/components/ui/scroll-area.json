@@ -1,0 +1,6 @@
+{
+  "dependencies": ["@radix-ui/react-scroll-area"],
+  "dev_dependence": [],
+  "hooks": [],
+  "supports": []
+}
