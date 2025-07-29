@@ -65,6 +65,7 @@ const COMPONENTS = [
   "menubar",
   "navigation-menu",
   "pagination",
+  "popover",
 ];
 
 export {
