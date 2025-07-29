@@ -1,0 +1,6 @@
+{
+  "dependencies": ["@radix-ui/react-accordion"],
+  "dev_dependence": [],
+  "hooks": [],
+  "supports": []
+}

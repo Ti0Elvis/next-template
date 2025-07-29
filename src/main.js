@@ -1,113 +1,218 @@
 #!/usr/bin/env node
+
 import {
-  copy_components_files,
-  copy_hooks_files,
-  copy_template_files,
-  get_prompts,
-  run,
-} from "./lib/utils.js";
+  copy_components,
+  copy_template,
+  on_cancel,
+  run_command,
+} from "./utils.js";
 import fs from "node:fs";
 import chalk from "chalk";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { DEPENDENCIES, DEV_DEPENDENCIES } from "./lib/constants.js";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import prompts from "prompts";
+import { COMPONENTS, DEPENDENCIES, DEV_DEPENDENCIES } from "./constants.js";
 
 // Manage Ctrl+C command
-process.on("SIGINT", () => {
-  console.log(chalk.yellow("\n👋 Exiting..."));
-  process.exit(0);
-});
+process.on("SIGINT", () => on_cancel());
 
-async function main() {
-  let project_path = "";
+(async function () {
+  let DEST;
+  const CWD = path.resolve(process.cwd());
 
-  try {
-    const { project_name, package_manager, components } = await get_prompts();
+  const { is_new_project } = await prompts(
+    {
+      type: "confirm",
+      initial: true,
+      name: "is_new_project",
+      message: "Is a new project?",
+    },
+    { onCancel: on_cancel }
+  );
 
-    // Creating folder and copying files
-    project_path = path.resolve(project_name);
-
-    if (fs.existsSync(project_path)) {
-      console.error(chalk.red("❌  A folder with that name already exists"));
-      process.exit(1);
-    }
-
-    console.log(
-      chalk.blue("📁 Creating project in:"),
-      chalk.bold(project_name)
-    );
-
-    fs.mkdirSync(project_path, { recursive: true });
-    const template_path = path.join(__dirname, "template");
-    const components_path = path.join(__dirname, "ui", "components");
-    const hooks_path = path.join(__dirname, "ui", "hooks");
-
-    copy_template_files(template_path, project_path);
-    copy_components_files(components_path, project_path, components);
-    copy_hooks_files(hooks_path, components_path, project_path, components);
-
-    // Initialize package.json
-    console.log(chalk.cyan("📦 Initializing and configure package.json..."));
-
-    const package_json = {
-      name: project_name,
-      version: "1.0.0",
-      private: true,
-      scripts: {
-        dev: "next dev --turbopack",
-        build: "next build",
-        start: "next start",
-        lint: "next lint",
-      },
-    };
-
-    const package_json_path = path.join(project_path, "package.json");
-    fs.writeFileSync(package_json_path, JSON.stringify(package_json, null, 2));
-
-    // Install dependencies
-    console.log(chalk.cyan("⬇️ Installing dependencies..."));
-
-    components.forEach((e) => {
-      const component_path = path.resolve(components_path, `${e}.json`);
-
-      if (fs.existsSync(component_path) === false) {
-        throw new Error(`Component ${e} not found`);
+  if (is_new_project === true) {
+    try {
+      if (fs.existsSync(path.join(CWD, "next.config.ts")) === true) {
+        throw new Error("Config file already exists");
       }
 
-      const json = JSON.parse(fs.readFileSync(component_path, "utf-8"));
+      const responses = await prompts(
+        [
+          {
+            type: "text",
+            name: "project_name",
+            message: "What is your project named?",
+            validate: (e) => {
+              if (e === undefined || e.trim() === "") {
+                return chalk.red("⚠️ The name is required");
+              }
 
-      json.forEach((e) => {
-        DEPENDENCIES.push(e);
-      });
-    });
+              if (!/^[a-zA-Z0-9-_]+$/.test(e.trim())) {
+                return chalk.red(
+                  "⚠️ Use only letters, numbers, dashes, and underscores"
+                );
+              }
 
-    if (package_manager === "npm") {
-      run(`npm install ${DEPENDENCIES.join(" ")}`, project_path);
-      run(`npm install ${DEV_DEPENDENCIES.join(" ")} -D`, project_path);
+              return true;
+            },
+          },
+          {
+            type: "select",
+            name: "package_manager",
+            message: "Which package manager would you want to use?",
+            choices: [
+              { title: "npm", value: "npm" },
+              { title: "pnpm", value: "pnpm" },
+            ],
+          },
+          {
+            type: "multiselect",
+            name: "components",
+            message: "Which components do you want to install?",
+            instructions: false,
+            choices: COMPONENTS.map((e) => {
+              return { title: e, value: e };
+            }),
+          },
+        ],
+        { onCancel: on_cancel }
+      );
+
+      const { project_name, package_manager, components } = responses;
+
+      // Creating folder and copying files
+      DEST = path.resolve(CWD, project_name);
+
+      if (fs.existsSync(DEST) === true) {
+        throw new Error("A folder with that name already exists");
+      }
+
+      console.log(chalk.blue("📁 Creating project..."));
+
+      fs.mkdirSync(DEST, { recursive: true });
+
+      copy_template(DEST);
+      await copy_components(DEST, components);
+
+      // Initialize package.json
+      console.log(chalk.blue("📦 Initializing and configure package.json..."));
+
+      const package_json = {
+        name: project_name,
+        version: "1.0.0",
+        private: true,
+        scripts: {
+          dev: "next dev --turbopack",
+          build: "next build",
+          start: "next start",
+          lint: "next lint",
+        },
+      };
+
+      const package_json_path = path.join(DEST, "package.json");
+
+      fs.writeFileSync(
+        package_json_path,
+        JSON.stringify(package_json, null, 2)
+      );
+
+      // Install dependencies
+      console.log(chalk.cyan("⬇️  Installing dependencies..."));
+
+      if (package_manager === "npm") {
+        run_command(`npm install ${DEPENDENCIES.join(" ")}`, DEST);
+        run_command(`npm install ${DEV_DEPENDENCIES.join(" ")} -D`, DEST);
+      }
+
+      if (package_manager === "pnpm") {
+        run_command(`pnpm add ${DEPENDENCIES.join(" ")}`, DEST);
+        run_command(`pnpm add ${DEV_DEPENDENCIES.join(" ")} -D`, DEST);
+      }
+
+      // Finish project
+      console.log(
+        chalk.yellow(
+          "📄 IMPORTANT: make sure to add your variable NEXT_PUBLIC_API in the .env file, e.g.: NEXT_PUBLIC_API=http://localhost:9000"
+        )
+      );
+
+      console.log(
+        chalk.green(`\n✅ Project ${project_name} created successfully! 🚀`)
+      );
+    } catch (error) {
+      console.error(chalk.red("❌ Internal error:"), error.message);
+
+      if (fs.existsSync(DEST) === true) {
+        fs.rmSync(DEST, { recursive: true, force: true });
+      }
+
+      process.exit(1);
     }
-
-    if (package_manager === "pnpm") {
-      run(`pnpm add ${DEPENDENCIES.join(" ")}`, project_path);
-      run(`pnpm add ${DEV_DEPENDENCIES.join(" ")} -D`, project_path);
-    }
-
-    console.log(chalk.green("\n✅ Project created successfully! 🚀"));
-
-    console.log(
-      chalk.yellow(
-        "📄 Make sure to add your API in the .env file, e.g.: API=http://localhost:9000"
-      )
-    );
-    process.exit(0);
-  } catch (error) {
-    console.error(chalk.red("❌ Internal error"), error.message);
-    if (fs.existsSync(project_path) === true) {
-      fs.rmSync(project_path, { recursive: true, force: true });
-    }
-    process.exit(1);
   }
-}
 
-main();
+  if (is_new_project === false) {
+    let package_manager;
+
+    try {
+      if (fs.existsSync(path.join(CWD, "next.config.ts")) === false) {
+        throw new Error("Config file not exists");
+      }
+
+      const responses = await prompts(
+        [
+          {
+            type: "multiselect",
+            name: "components",
+            message: "Which components do you want to install?",
+            instructions: false,
+            choices: COMPONENTS.map((e) => {
+              return { title: e, value: e };
+            }),
+          },
+        ],
+        { onCancel: on_cancel }
+      );
+
+      const { components } = responses;
+
+      // Set package manager
+      if (fs.existsSync(path.join(CWD, "package-lock.json")) === true) {
+        package_manager = "npm";
+      }
+
+      if (fs.existsSync(path.join(CWD, "pnpm-lock.yaml")) === true) {
+        package_manager = "pnpm";
+      }
+
+      if (package_manager === undefined) {
+        throw new Error("Not package_manager found");
+      }
+
+      // Copying files
+      DEST = path.resolve(CWD);
+
+      await copy_components(DEST, components);
+
+      // Install dependencies
+      console.log(chalk.cyan("⬇️  Installing dependencies..."));
+
+      if (package_manager === "npm") {
+        run_command(`npm install ${DEPENDENCIES.join(" ")}`, DEST);
+        run_command(`npm install ${DEV_DEPENDENCIES.join(" ")} -D`, DEST);
+      }
+
+      if (package_manager === "pnpm") {
+        run_command(`pnpm add ${DEPENDENCIES.join(" ")}`, DEST);
+        run_command(`pnpm add ${DEV_DEPENDENCIES.join(" ")} -D`, DEST);
+      }
+
+      // Finish project
+      console.log(chalk.green("\n✅ Components add successfully!"));
+    } catch (error) {
+      console.error(chalk.red("❌ Internal error:"), error.message);
+
+      process.exit(1);
+    }
+  }
+
+  process.exit(0);
+})();
