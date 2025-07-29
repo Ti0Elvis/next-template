@@ -75,6 +75,7 @@ const COMPONENTS = [
   "sheet",
   "sidebar",
   "skeleton",
+  "slider",
 ];
 
 export {
