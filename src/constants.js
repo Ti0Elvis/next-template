@@ -60,6 +60,7 @@ const COMPONENTS = [
   "form",
   "hover-card",
   "input",
+  "input-otp",
 ];
 
 export {
