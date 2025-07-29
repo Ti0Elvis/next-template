@@ -50,6 +50,7 @@ const COMPONENTS = [
   "card",
   "carousel",
   "chart",
+  "checkbox",
 ];
 
 export {
