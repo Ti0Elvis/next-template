@@ -1,0 +1,6 @@
+{
+  "dependencies": ["react-day-picker"],
+  "dev_dependence": [],
+  "hooks": [],
+  "supports": ["button"]
+}
