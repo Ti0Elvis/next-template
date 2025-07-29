@@ -1,0 +1,6 @@
+{
+  "dependencies": ["@radix-ui/react-toggle-group"],
+  "dev_dependence": [],
+  "hooks": [],
+  "supports": ["toggle"]
+}

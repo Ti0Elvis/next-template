@@ -82,6 +82,7 @@ const COMPONENTS = [
   "tabs",
   "textarea",
   "toggle",
+  "toggle-group",
 ];
 
 export {
