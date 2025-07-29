@@ -70,6 +70,7 @@ const COMPONENTS = [
   "radio-group",
   "resizable",
   "scroll-area",
+  "select",
 ];
 
 export {
