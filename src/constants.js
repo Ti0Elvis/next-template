@@ -72,6 +72,7 @@ const COMPONENTS = [
   "scroll-area",
   "select",
   "separator",
+  "sheet",
 ];
 
 export {
