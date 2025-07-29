@@ -62,6 +62,7 @@ const COMPONENTS = [
   "input",
   "input-otp",
   "label",
+  "menubar",
 ];
 
 export {

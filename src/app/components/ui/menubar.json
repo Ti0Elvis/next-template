@@ -1,0 +1,6 @@
+{
+  "dependencies": ["@radix-ui/react-menubar"],
+  "dev_dependence": [],
+  "hooks": [],
+  "supports": []
+}
