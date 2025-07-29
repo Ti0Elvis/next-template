@@ -74,6 +74,7 @@ const COMPONENTS = [
   "separator",
   "sheet",
   "sidebar",
+  "skeleton",
 ];
 
 export {
