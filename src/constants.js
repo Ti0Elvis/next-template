@@ -80,6 +80,7 @@ const COMPONENTS = [
   "switch",
   "table",
   "tabs",
+  "textarea",
 ];
 
 export {
