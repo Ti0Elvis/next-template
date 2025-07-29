@@ -116,7 +116,7 @@ process.on("SIGINT", () => on_cancel());
       );
 
       // Install dependencies
-      console.log(chalk.cyan("⬇️  Installing dependencies..."));
+      console.log(chalk.cyan("⬇️ Installing dependencies..."));
 
       if (package_manager === "npm") {
         run_command(`npm install ${DEPENDENCIES.join(" ")}`, DEST);
@@ -131,9 +131,17 @@ process.on("SIGINT", () => on_cancel());
       // Finish project
       console.log(
         chalk.yellow(
-          "📄 IMPORTANT: make sure to add your variable NEXT_PUBLIC_API in the .env file, e.g.: NEXT_PUBLIC_API=http://localhost:9000"
+          "⚠️ IMPORTANT: make sure to add your variable NEXT_PUBLIC_API in the .env file, e.g.: NEXT_PUBLIC_API=http://localhost:9000"
         )
       );
+
+      if (components.some((e) => e === "sonner") === true) {
+        console.log(
+          chalk.yellow(
+            "⚠️ IMPORTANT: you install the sonner component. Don't forget to add the Toaster in your layout"
+          )
+        );
+      }
 
       console.log(
         chalk.green(`\n✅ Project ${project_name} created successfully! 🚀`)
@@ -206,6 +214,13 @@ process.on("SIGINT", () => on_cancel());
       }
 
       // Finish project
+      if (components.some((e) => e === "sonner") === true) {
+        console.log(
+          chalk.yellow(
+            "⚠️ IMPORTANT: you install the sonner component. Don't forget to add the Toaster in your layout"
+          )
+        );
+      }
       console.log(chalk.green("\n✅ Components add successfully!"));
     } catch (error) {
       console.error(chalk.red("❌ Internal error:"), error.message);

@@ -76,6 +76,7 @@ const COMPONENTS = [
   "sidebar",
   "skeleton",
   "slider",
+  "sonner",
 ];
 
 export {
