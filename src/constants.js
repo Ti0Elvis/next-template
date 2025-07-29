@@ -77,6 +77,7 @@ const COMPONENTS = [
   "skeleton",
   "slider",
   "sonner",
+  "switch",
 ];
 
 export {
