@@ -68,6 +68,7 @@ const COMPONENTS = [
   "popover",
   "progress",
   "radio-group",
+  "resizable",
 ];
 
 export {
