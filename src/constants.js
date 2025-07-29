@@ -59,6 +59,7 @@ const COMPONENTS = [
   "dropdown-menu",
   "form",
   "hover-card",
+  "input",
 ];
 
 export {
