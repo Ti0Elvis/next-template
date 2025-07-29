@@ -51,6 +51,7 @@ const COMPONENTS = [
   "carousel",
   "chart",
   "checkbox",
+  "collapsible",
 ];
 
 export {
