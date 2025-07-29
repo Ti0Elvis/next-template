@@ -1,6 +1,6 @@
 {
   "name": "@tioelvis/next-template",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "CLI to scaffold a Next.js + Tailwind project using shadcn/ui components",
   "type": "module",
   "bin": {

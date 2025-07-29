@@ -45,6 +45,7 @@ const COMPONENTS = [
   "avatar",
   "badge",
   "breadcrumb",
+  "button",
 ];
 
 export {
