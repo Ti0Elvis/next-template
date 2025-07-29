@@ -71,6 +71,7 @@ const COMPONENTS = [
   "resizable",
   "scroll-area",
   "select",
+  "separator",
 ];
 
 export {
