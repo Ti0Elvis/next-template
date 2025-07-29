@@ -53,6 +53,7 @@ const COMPONENTS = [
   "checkbox",
   "collapsible",
   "command",
+  "context-menu",
 ];
 
 export {
