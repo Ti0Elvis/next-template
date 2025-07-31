@@ -17,7 +17,6 @@ const DEPENDENCIES = [
   "date-fns",
   "lucide-react",
   "next",
-  "next-auth",
   "next-themes",
   "react",
   "react-dom",
