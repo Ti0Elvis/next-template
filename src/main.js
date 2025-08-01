@@ -176,24 +176,20 @@ process.on("SIGINT", () => on_cancel());
               return { title: e, value: e };
             }),
           },
+          {
+            type: "select",
+            name: "package_manager",
+            message: "Which package manager would you want to use?",
+            choices: [
+              { title: "npm", value: "npm" },
+              { title: "pnpm", value: "pnpm" },
+            ],
+          },
         ],
         { onCancel: on_cancel }
       );
 
-      const { components } = responses;
-
-      // Set package manager
-      if (fs.existsSync(path.join(CWD, "package-lock.json")) === true) {
-        package_manager = "npm";
-      }
-
-      if (fs.existsSync(path.join(CWD, "pnpm-lock.yaml")) === true) {
-        package_manager = "pnpm";
-      }
-
-      if (package_manager === undefined) {
-        throw new Error("Not package_manager found");
-      }
+      const { components, package_manager } = responses;
 
       // Copying files
       DEST = path.resolve(CWD);
