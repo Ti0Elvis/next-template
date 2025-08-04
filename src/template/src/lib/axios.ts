@@ -1,11 +1,20 @@
-import { isAxiosError } from "axios";
+import { API } from "@/lib/constants";
+import axios, { isAxiosError } from "axios";
+
+export const axios_instance = axios.create({
+  baseURL: API,
+  withCredentials: true,
+});
 
 export class CustomAxiosError extends Error {
+  status: number;
+
   constructor(error: unknown) {
     let message = "";
+    let status = 500;
 
     if (isAxiosError(error) === true) {
-      const status = error.response?.status ?? 500;
+      status = error.response?.status ?? 500;
       const p = error.response?.data?.message;
 
       if (status === 401 || status === 403) {
@@ -24,6 +33,7 @@ export class CustomAxiosError extends Error {
 
     super(message);
     this.name = "CustomAxiosError";
+    this.status = status;
     Object.setPrototypeOf(this, CustomAxiosError.prototype);
   }
 }
